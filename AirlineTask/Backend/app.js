@@ -3,6 +3,8 @@ import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
+import passengerRoutes from "./routes/passenger.routes.js";
+
 
 import { FRONTEND_URL } from "./config.js";
 
@@ -19,6 +21,8 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(morgan("dev"));
 app.use(cookieParser())
 
+
+app.use("/api/passenger",passengerRoutes);
 
 
 if (process.env.NODE_ENV === "production") {
