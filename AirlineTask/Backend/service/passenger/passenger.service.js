@@ -20,4 +20,20 @@ export const passengerService = {
        return { code: 400, message: "Error inesperado al crear pasajero" };
       }
     },
+    async deletePassenger(passengerId) {
+      try {
+        const deletedCount = await Passenger.destroy({
+          where: { DSC_PASSPORT: passengerId },
+        });
+    
+        if (deletedCount === 0) {
+          return { code: 404, message: "Pasajero no encontrado." };
+        }
+    
+        return { code: 200, message: `Pasajero eliminado correctamente.` };
+      } catch (error) {
+        console.error("Error en deletePassenger:", error);
+        return { code: 400, message: "Error inesperado al eliminar pasajero." };
+      }
+    }
   };

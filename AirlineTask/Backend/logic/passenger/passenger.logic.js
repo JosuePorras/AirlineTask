@@ -108,3 +108,20 @@ export const passenger_register = async (req,res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+export const passenger_delete = async (req,res) => {
+    try {
+        const ID_PASSENGER= req.params.id;
+
+        if (!ID_PASSENGER) return sendError(res, "Pasaporte del pasajero es requerido.", 400);
+
+        const result= await passengerService.deletePassenger(ID_PASSENGER);
+
+        return result.code === 200
+        ? sendSuccess(res, result.message, null, result.code)
+        : sendError(res, result.message, result.code);
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
